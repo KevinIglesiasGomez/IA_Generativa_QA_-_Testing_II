@@ -1,0 +1,16 @@
+{
+  "locale": "es_ES",
+  "type": "first_names",
+  "data": {
+    "male": [
+      "Antonio", "Manuel", "José", "Francisco", "David", "Juan", "Javier", "Daniel", "Carlos", "Miguel",
+      "Alejandro", "Pedro", "Jesús", "Rafael", "Ángel", "Pablo", "Fernando", "Jorge", "Luis", "Sergio",
+      "Alberto", "Adrián", "Diego", "Álvaro", "Raúl", "Rubén", "Marcos", "Iván", "Andrés", "Víctor"
+    ],
+    "female": [
+      "María", "Carmen", "Ana", "Isabel", "Dolores", "Pilar", "Teresa", "Rosa", "Josefa", "Antonia",
+      "Laura", "Marta", "Elena", "Sara", "Lucía", "Patricia", "Cristina", "Paula", "Raquel", "Beatriz",
+      "Silvia", "Natalia", "Andrea", "Alba", "Sofía", "Julia", "Clara", "Marina", "Mónica", "Irene"
+    ]
+  }
+}

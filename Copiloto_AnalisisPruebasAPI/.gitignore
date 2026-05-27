@@ -1,0 +1,8 @@
+# Ignorar todo en la raíz
+/*
+
+# Excepto el archivo .gitignore y el directorio .github
+!/.gitignore
+!/.github/
+
+!README.md

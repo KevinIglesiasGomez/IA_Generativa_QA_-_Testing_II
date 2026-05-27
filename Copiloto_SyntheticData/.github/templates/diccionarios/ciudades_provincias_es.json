@@ -1,0 +1,26 @@
+{
+  "locale": "es_ES",
+  "type": "cities_provinces",
+  "data": [
+    {"ciudad": "Madrid", "provincia": "Madrid", "codigo_postal_inicio": "28"},
+    {"ciudad": "Barcelona", "provincia": "Barcelona", "codigo_postal_inicio": "08"},
+    {"ciudad": "Valencia", "provincia": "Valencia", "codigo_postal_inicio": "46"},
+    {"ciudad": "Sevilla", "provincia": "Sevilla", "codigo_postal_inicio": "41"},
+    {"ciudad": "Zaragoza", "provincia": "Zaragoza", "codigo_postal_inicio": "50"},
+    {"ciudad": "Málaga", "provincia": "Málaga", "codigo_postal_inicio": "29"},
+    {"ciudad": "Murcia", "provincia": "Murcia", "codigo_postal_inicio": "30"},
+    {"ciudad": "Palma", "provincia": "Baleares", "codigo_postal_inicio": "07"},
+    {"ciudad": "Las Palmas", "provincia": "Las Palmas", "codigo_postal_inicio": "35"},
+    {"ciudad": "Bilbao", "provincia": "Vizcaya", "codigo_postal_inicio": "48"},
+    {"ciudad": "Alicante", "provincia": "Alicante", "codigo_postal_inicio": "03"},
+    {"ciudad": "Córdoba", "provincia": "Córdoba", "codigo_postal_inicio": "14"},
+    {"ciudad": "Valladolid", "provincia": "Valladolid", "codigo_postal_inicio": "47"},
+    {"ciudad": "Vigo", "provincia": "Pontevedra", "codigo_postal_inicio": "36"},
+    {"ciudad": "Gijón", "provincia": "Asturias", "codigo_postal_inicio": "33"},
+    {"ciudad": "Granada", "provincia": "Granada", "codigo_postal_inicio": "18"},
+    {"ciudad": "San Sebastián", "provincia": "Guipúzcoa", "codigo_postal_inicio": "20"},
+    {"ciudad": "Santander", "provincia": "Cantabria", "codigo_postal_inicio": "39"},
+    {"ciudad": "Toledo", "provincia": "Toledo", "codigo_postal_inicio": "45"},
+    {"ciudad": "Burgos", "provincia": "Burgos", "codigo_postal_inicio": "09"}
+  ]
+}

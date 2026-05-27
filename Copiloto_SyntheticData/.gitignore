@@ -1,0 +1,11 @@
+# Ignorar todo
+*
+*/
+
+# Excepto el directorio .github y su contenido
+!.github/
+!.github/**
+
+
+# No ignorar el .gitignore
+!.gitignore

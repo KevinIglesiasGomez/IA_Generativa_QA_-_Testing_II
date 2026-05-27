@@ -1,0 +1,2 @@
+Tras el Login. Debes hacer click en el menú  <a href="#" class="atd-icon atd-icon-menu"></a> para que se abran las opciones disponibles.
+Luego hacer click en el campo de búsqueda (<input type="text" autocomplete="off" id="inputMenuBuscar" name="inputMenuBuscar" placeholder="Buscar aplicaciones" class="inputMenuBuscar" placeholder-i18n="marco-principal-buscarApps">) y escribir "Mis Datos" para filtrar las opciones del menú.

@@ -1,0 +1,9 @@
+# Ignorar todo
+*
+
+# Permitir el directorio .github y su contenido
+!.github/
+!.github/**
+
+# Permitir el propio .gitignore
+!.gitignore

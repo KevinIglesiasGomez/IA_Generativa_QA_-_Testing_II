@@ -1,0 +1,14 @@
+# Ignorar todo
+*
+*/
+
+# Permitir el archivo .gitignore
+!.gitignore
+
+# Permitir únicamente el directorio .github y su contenido
+!.github/
+!.github/**
+
+# Permitir archivos de configuración del workspace
+!Demo_IngenieriaInversa.code-workspace
+!README.md

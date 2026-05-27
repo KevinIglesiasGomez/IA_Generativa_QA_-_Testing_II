@@ -1,0 +1,12 @@
+{
+  "locale": "es_ES",
+  "type": "street_names",
+  "data": [
+    "Calle Mayor", "Calle Real", "Avenida de la Constitución", "Calle del Carmen", "Plaza España",
+    "Calle San Juan", "Avenida Generalísimo", "Calle Cervantes", "Plaza Mayor", "Calle Alcalá",
+    "Gran Vía", "Paseo de Gracia", "Rambla Catalunya", "Calle Valencia", "Avenida Diagonal",
+    "Calle Serrano", "Calle Goya", "Paseo Castellana", "Calle Preciados", "Calle Toledo",
+    "Calle Santa María", "Avenida Libertad", "Calle Rosa", "Calle San Pedro", "Plaza Castilla",
+    "Calle Independencia", "Avenida República", "Calle Cristo", "Plaza Ayuntamiento", "Calle Victoria"
+  ]
+}

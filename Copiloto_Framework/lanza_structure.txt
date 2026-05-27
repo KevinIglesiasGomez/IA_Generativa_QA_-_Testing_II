@@ -1,0 +1,6 @@
+sudo openfortivpn 
+
+/qa_1_generate_playwright_structure playwright_folder="playwright-demo/" project_bdd="features/" environment_url="https://test-digitaldesktop.knowmadmood.com/" 
+username="amartinez" password="Ratapl4n"
+
+/qa_2_generate_playwright_tests feature_name="Login.feature" project_bdd="playwright-demo/src/features" playwright_folder="playwright-demo/" JSP_folder="html/"

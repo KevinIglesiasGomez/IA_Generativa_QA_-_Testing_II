@@ -1,0 +1,4 @@
+# Permitir solo el directorio .github y .gitignore
+/*
+!.github/
+!.gitignore

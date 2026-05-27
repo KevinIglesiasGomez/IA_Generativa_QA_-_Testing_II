@@ -1,0 +1,6 @@
+# Ignorar todo en la raíz
+/*
+
+# Excepto .gitignore y la carpeta .github
+!/.gitignore
+!/.github/

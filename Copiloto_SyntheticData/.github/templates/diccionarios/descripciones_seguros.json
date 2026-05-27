@@ -1,0 +1,66 @@
+{
+  "locale": "es_ES",
+  "type": "insurance_descriptions",
+  "data": {
+    "AUTO": [
+      "Seguro a todo riesgo con franquicia de 300 euros",
+      "Seguro a terceros ampliado con cobertura de lunas",
+      "Seguro a todo riesgo sin franquicia, incluye asistencia en viaje",
+      "Seguro básico a terceros con responsabilidad civil",
+      "Seguro completo con protección de conductor y ocupantes",
+      "Seguro a todo riesgo con valor a nuevo hasta 2 años",
+      "Cobertura completa incluye robo, incendio y fenómenos atmosféricos",
+      "Seguro premium con reparación en taller oficial",
+      "Seguro económico a terceros CON defensa jurídica",
+      "Seguro flexible con franquicia variable según uso"
+    ],
+    "HOGAR": [
+      "Seguro multirriesgo del hogar con continente y contenido",
+      "Cobertura básica de incendios, robo y daños por agua",
+      "Seguro completo con responsabilidad civil familiar",
+      "Protección todo riesgo incluye electrodomésticos y joyas",
+      "Seguro hogar con asistencia 24/7 y cerrajería urgente",
+      "Cobertura ampliada con fenómenos atmosféricos y cristales",
+      "Seguro premium incluye daños estéticos y pérdida de alquileres",
+      "Protección vivienda con defensa jurídica y reclamaciones",
+      "Seguro básico con cobertura de continente únicamente",
+      "Multirriesgo hogar con protección de jardín y piscina"
+    ],
+    "VIDA": [
+      "Seguro de vida con cobertura por fallecimiento e invalidez",
+      "Protección familiar con capital garantizado",
+      "Seguro de vida ahorro con rentabilidad asegurada",
+      "Cobertura temporal renovable con opción de conversión",
+      "Seguro vida entera con beneficios garantizados",
+      "Protección completa incluye enfermedades graves",
+      "Seguro vida con exención de primas por invalidez",
+      "Cobertura unitlinked con inversión en fondos",
+      "Seguro temporal decreciente vinculado a hipoteca",
+      "Plan de ahorro vida con ventajas fiscales"
+    ],
+    "SALUD": [
+      "Seguro médico privado con cuadro completo de especialistas",
+      "Cobertura dental incluida con copago reducido",
+      "Seguro salud sin copagos ni periodos de carencia",
+      "Protección médica completa con hospitalización y cirugía",
+      "Seguro con reembolso de gastos médicos hasta límite",
+      "Cobertura internacional con asistencia en viaje",
+      "Seguro médico familiar con descuentos por miembros",
+      "Plan de salud con medicina alternativa incluida",
+      "Cobertura básica de atención primaria y urgencias",
+      "Seguro premium con acceso a medicina privada exclusiva"
+    ],
+    "VIAJE": [
+      "Seguro de viaje con cobertura médica internacional",
+      "Protección completa incluye cancelación y equipaje",
+      "Seguro anual multiviaje con ilimitados desplazamientos",
+      "Cobertura de asistencia en viaje y repatriación",
+      "Seguro viaje con protección COVID-19 incluida",
+      "Protección deportes de aventura y actividades de riesgo",
+      "Seguro familiar para viajes en grupo",
+      "Cobertura premium con responsabilidad civil en el extranjero",
+      "Seguro básico de asistencia médica de urgencia",
+      "Protección viaje con extensión a equipos electrónicos"
+    ]
+  }
+}
