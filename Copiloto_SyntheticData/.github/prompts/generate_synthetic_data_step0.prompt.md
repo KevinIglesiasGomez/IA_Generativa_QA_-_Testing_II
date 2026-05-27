@@ -99,19 +99,52 @@ Qué datos que necesitas:
    Nota: Se creará la estructura completa (schemas/, metadata/, datasets/, etc.)
 ```
 
-### 2.4 Configuración Específica del Cliente
+### 2.4 Fuentes de Datos Estructurados del Proyecto (NUEVO)
+
+**Pregunta al usuario antes de la configuración específica del cliente:**
+```
+8. ¿Dispones de un fichero de mapeo de escenarios Gherkin a tablas de base de datos?
+   Ejemplo: un fichero Markdown que relacione
+   cada escenario BDD con las tablas BD necesarias para ejecutarlo.
+
+   Si existe: Proporciona la ruta del fichero
+   Si no existe o no aplica: Escribe "no"
+   
+   ${input:escenarios_tablas_file}
+```
+
+Si el usuario proporciona una ruta válida (diferente de "no"), continúa con:
+
+```
+8b. ¿Dispones también de ficheros YAML con la estructura de las tablas de BD
+    (columnas, tipos, PKs, FKs)?
+    Ejemplo: ficheros tipo "informe.yaml", "siniestro.yaml", etc. en un directorio "tablas/".
+
+    Si existen: Proporciona la ruta del directorio que contiene los ficheros YAML
+    Si no existen: Escribe "no"
+    
+    ${input:tablas_yaml_dir}
+```
+
+> **NOTA IMPORTANTE**: Si el usuario proporciona ambos ficheros (escenarios_tablas_file y tablas_yaml_dir),
+> en el Step 1 se activará el **FLUJO D - Escenarios BDD + Esquema YAML**, que extrae automáticamente
+> el esquema de datos directamente de la estructura de la BD y los escenarios de prueba.
+> Esto produce datos de prueba alineados con los escenarios Gherkin reales.
+
+### 2.5 Configuración Específica del Cliente
 
 **Pregunta al usuario:**
 ```
-8. ¿Tienes un archivo de instrucciones específico del cliente que defina el esquema de datos, campos requeridos y reglas de negocio o prefieres que estudie la documentación existente?
+9. ¿Tienes un archivo de instrucciones específico del cliente que defina el esquema de datos, campos requeridos y reglas de negocio o prefieres que estudie la documentación existente?
    
    Si ya existe: Proporciona la ruta del archivo
    Si no existe: Lo crearemos juntos en el siguiente paso
+   (Si respondiste "sí" en la pregunta 8, este paso es opcional)
    
    ${input:client_instructions_file}
 ```
 
-### 2.5 Configuración Avanzada (Opcional)
+### 2.6 Configuración Avanzada (Opcional)
 
 **Pregunta al usuario:**
 ```
@@ -168,6 +201,11 @@ Después de recopilar toda la información, presenta un resumen para confirmaci�
 - Distribución: ${input:scenario_distribution}
 - Rango de fechas: ${input:date_range}
 - Nivel de realismo: ${input:realism_level}
+
+### Fuentes de Datos Estructurados (Escenarios BDD + YAML BD)
+- Fichero escenarios-tablas: ${input:escenarios_tablas_file}
+- Directorio YAMLs de tablas: ${input:tablas_yaml_dir}
+- Flujo Step 1: [FLUJO D - Escenarios BDD + YAML / No aplica]
 
 ### Instrucciones del Cliente
 - Archivo: ${input:client_instructions_file}

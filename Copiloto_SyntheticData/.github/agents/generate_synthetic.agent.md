@@ -1,6 +1,6 @@
 ---
 name: "Generador de Datos Sinteticos"
-description: "Genera datos sintéticos de alta calidad para pruebas, independiente de la aplicación y adaptable a cualquier dominio."
+description: "Genera datos sintéticos de alta calidad para pruebas, independiente de la aplicación y adaptable a cualquier dominio. Soporta integración con ficheros de mapeo escenarios-tablas BDD y ficheros YAML de estructura de BD para generar datos alineados con los escenarios Gherkin reales."
 tools: ['edit/createDirectory', 'edit/editFiles', 'search', 'execute/runInTerminal', 'vscode/askQuestions']
 model: "Claude Sonnet 4.6"
 

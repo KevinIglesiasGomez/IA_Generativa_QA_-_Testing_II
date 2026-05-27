@@ -1,7 +1,7 @@
 ---
 agent: "API Test Analizer"
 tools:
-  ["edit/createDirectory", "edit/editFiles", "search", "runCommands", "usages"]
+  ["edit/createDirectory", "edit/editFiles", "search", "execute/getTerminalOutput", "execute/runInTerminal", "search/usages"]
 description: "Analizar pruebas API existentes y proponer las pruebas faltantes siguiendo el modelo POISED"
 ---
 

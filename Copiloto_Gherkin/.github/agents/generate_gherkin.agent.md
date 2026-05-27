@@ -1,7 +1,7 @@
 ---
 name: "Generador de escenarios Gherkin"
 description: "Genera historias BDD y escenarios Gherkin a partir de requisitos o historias de usuario."
-tools: ['edit/createDirectory', 'edit/editFiles', 'search', 'runCommands']
+tools: ['edit/createDirectory', 'edit/editFiles', 'search', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection']
 model: "Claude Sonnet 4.5"
 
 ---
