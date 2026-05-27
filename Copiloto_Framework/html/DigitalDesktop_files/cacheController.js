@@ -1,1 +1,0 @@
-let cacheController={getUsername:function(e){return new Promise((e,a)=>{ajaxController.executeNew({appContext:null,method:"GET",action:"/userCache",data:null,callback:e,disableMe:!0,paramsToCallback:null,callbackError:a})})}};
