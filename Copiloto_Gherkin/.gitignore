@@ -1,6 +1,3 @@
-# Ignorar todo
-*
-
 # Excepto estos archivos y directorios
 !.gitignore
 !.github/
