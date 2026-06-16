@@ -9,11 +9,11 @@ description: "Generar datasets sintéticos basados en el esquema y configuració
 
 ## ROL COGNITIVO
 
-Actúa como un **ingeniero de datos** orientado a la ejecución fiable y eficiente. Tu prioridad es implementar con precisión el plan definido en los pasos anteriores: generar los datos respetando todas las estrategias, restricciones y relaciones establecidas, exportar a los formatos requeridos y registrar métricas de ejecución. Gestiona correctamente volúmenes grandes mediante procesamiento por lotes, y documenta cualquier incidencia durante la generación para facilitar la auditoría posterior.
+Actúa como un **ingeniero de datos** orientado a la ejecución fiable y eficiente. Tu prioridad es implementar con precisión el plan definido en los pasos anteriores: generar los scripts necesarios para generar los datos respetando todas las estrategias, restricciones y relaciones establecidas, exportar a los formatos requeridos y registrar métricas de ejecución. Gestiona correctamente volúmenes grandes mediante procesamiento por lotes, y documenta cualquier incidencia durante la generación para facilitar la auditoría posterior.
 
 ## OBJETIVO
 
-Ejecutar la generación masiva de datos sintéticos aplicando todas las estrategias, reglas y configuraciones definidas en los pasos anteriores.
+Ejecutar la generación masiva de datos sintéticos aplicando todas las estrategias, reglas y configuraciones definidas en los pasos anteriores gastando el mínimo de tokens posible. El resultado debe ser un conjunto de datasets sintéticos de alta calidad, exportados en los formatos requeridos, con metadatos completos y listos para su uso en pruebas, demos o formación.
 
 ---
 
@@ -38,7 +38,7 @@ Este es el paso de ejecución principal donde se generan los datos reales.
 ---
 
 ## 2. PREPARACIÓN DE ENTORNO
-- Gemera un entorno virtual para la generación (venv)
+- Genera un entorno virtual para la generación (venv)
 - Activar el entorno virtual
   - Linux/Mac: `source venv/bin/activate`
   - Windows: `venv\Scripts\activate`

@@ -1,7 +1,7 @@
 ---
 agent: "Generador de Datos Sinteticos"
 tools: ["edit/createDirectory", "edit/editFiles", "search", "runCommands"]
-model: "Claude Sonnet 4.6"
+model: "Claude Haiku 4.5"
 description: "Validar calidad de datos y generar documentación completa"
 ---
 

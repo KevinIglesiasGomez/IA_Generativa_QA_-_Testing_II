@@ -63,6 +63,8 @@ Definir estándares y mejores prácticas para generar datos sintéticos de alta 
 
 **1. Generación Aleatoria Controlada:**
 
+- Crear scripts que generen datos aleatorios pero controlados por parámetros
+- Todos los scripts deben quedar guardades en el área de trabajo para su reutilización
 - Usar semilla (seed) para reproducibilidad
 - Aplicar distribuciones apropiadas 
   - normal: valores alrededor de una media
@@ -79,10 +81,11 @@ Definir estándares y mejores prácticas para generar datos sintéticos de alta 
 
 **3. Generación Basada en Diccionarios:**
 
+- Usa los diccionarios ya existentes en 'templates/diccionarios' si son relevantes para el dominio
 - Usar listas curadas de valores reales (nombres, ciudades, etc.)
 - Combinar elementos de múltiples diccionarios
 - Mantener coherencia cultural y geográfica
-- Usar los diccionarios proporcionados en area de trabajo si son relevantes para el dominio.
+- Si se generan diccionarios nuevos deben quedar guardados en el área de trabajo para su reutilización
 
 **4. Generación Basada en Reglas:**
 

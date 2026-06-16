@@ -56,7 +56,7 @@ Escenario: Validar campos obligatorios en factura
 
 ```
 ${output_directory}/
-├── README.md    # Comprehensive documentation (ROOT LEVEL)
+├── INFORME.md    # Comprehensive documentation (ROOT LEVEL)
 └── features/    # BDD feature files directory
     ├── authentication.feature
     ├── expediente-management.feature
@@ -66,7 +66,7 @@ ${output_directory}/
 
 **Importante:**
 - **Los archivos .feature** van SOLO en el subdirectorio `features/`
-- **README.md** se debe ubicar en la raíz de `${output_directory}/` (NO en directorio `features/`)
+- **INFORME.md** se debe ubicar en la raíz de `${output_directory}/` (NO en directorio `features/`)
 
 ---
 

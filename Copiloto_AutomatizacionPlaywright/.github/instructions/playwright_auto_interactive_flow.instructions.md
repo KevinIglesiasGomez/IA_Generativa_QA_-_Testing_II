@@ -31,30 +31,16 @@ Nunca generar múltiples escenarios sin aprobación individual. El proceso debe 
    
 9. **ESPERAR A QUE LA EJECUCIÓN TERMINE COMPLETAMENTE** antes de continuar.
 
-10. **ANÁLISIS AUTOMÁTICO DEL RESULTADO** (OBLIGATORIO):
+10. Tras la ejecución, **PREGUNTAR OBLIGATORIAMENTE**:
+    "¿La prueba funcionó correctamente? (sí/no/error)"
     
-    Tras la ejecución, el agente **DEBE ANALIZAR AUTOMÁTICAMENTE** el resultado basándose en:
-    - **Exit Code del comando**: 0 = éxito, != 0 = fallo
-    - **Salida del terminal**: Buscar patrones "scenario (X passed)", "scenario (X failed)", mensajes de error
-    
-    **CASO A: EJECUCIÓN EXITOSA** (Exit Code = 0 y "scenario (X passed)" visible)
-    - Confirmar éxito al usuario: "Escenario ejecutado exitosamente ([X/Y] steps passed)"
-    - Actualizar bitácora automáticamente
-    - Preguntar: "¿Continuar con el siguiente escenario? (sí/no)"
-    
-    **CASO B: EJECUCIÓN FALLIDA** (Exit Code != 0 o "scenario (X failed)" visible)
-    - Analizar automáticamente el error de la salida del terminal
-    - Identificar la causa raíz del error
-    - Presentar diagnóstico y opciones SIN PREGUNTAR primero si falló (ya es evidente)
-    - Seguir protocolo de fallos (sección 4) directamente
-    
-    **REGLA CRÍTICA**: 
-    - **NUNCA preguntar** "¿La prueba funcionó correctamente?" - El Exit Code y la salida ya lo indican
-    - **ANALIZAR primero**, **INFORMAR después**, **PREGUNTAR solo para aprobar correcciones**
+    - Si el usuario responde **"sí"**: Actualizar bitácora y continuar con siguiente escenario
+    - Si el usuario responde **"no" o "error"**: Solicitar detalles del error o screenshot
+    - **NUNCA asumir** el resultado de la ejecución, siempre esperar respuesta del usuario
 
-11. Si el análisis automático detecta fallo, seguir el protocolo de fallos automático (sección 4)
+11. Si hay error reportado por el usuario, seguir el protocolo de fallos (sección 4)
 
-12. La bitácora se actualiza automáticamente tras éxito confirmado
+12. Actualizar bitácora de cambios solo tras confirmación de éxito
 
 ---
 
@@ -78,111 +64,76 @@ Se debe mostrar siempre el código de la prueba propuesta, no solo la descripci�
 **Comandos de aprobación**:
 - **"sí" / "aprobar"** - Aprueba la acción propuesta
 - **"no" / "rechazar"** - Rechaza la acción propuesta
+- **"error"** - Indica que hubo un error en la ejecución
 
 **Comandos de flujo**:
 - **"Aprobar escenario N (sí/no)"** - Aprueba o rechaza cada escenario propuesto
 - **"Reconsiderar escenario N"** - Solicita mejoras a la implementación propuesta
 - **"Ejecutar"** - Confirma que se puede ejecutar la prueba
+- **"Reintentar"** - Confirma que se puede volver a ejecutar tras corrección
 - **"Continuar"** - Avanza al siguiente escenario tras éxito
 - **"para"** - Detiene el flujo actual
-
-**Nota:** Ya NO es necesario responder "error" tras una ejecución fallida - el agente lo detecta automáticamente analizando el Exit Code y la salida del terminal
 
 **Comandos de sesión**:
 - **"Finalizar sesión de trabajo"** - Cierra la sesión y actualiza bitácora
 - **"Reiniciar sesión de trabajo"** - Retoma desde el último punto registrado
 - **"Cambiar de página/componente/feature"** - Cambia el foco de trabajo
 
-**IMPORTANTE**: 
-- El copiloto **DEBE ESPERAR** confirmaciones antes de aplicar correcciones
-- El copiloto **DEBE ANALIZAR AUTOMÁTICAMENTE** los resultados de ejecuciones (no preguntar si pasó/falló)
-- **Exit Code y salida del terminal** son la fuente de verdad para determinar éxito/fallo
+**IMPORTANTE**: El copiloto **DEBE ESPERAR** estas confirmaciones antes de proceder. **NUNCA asumir** la respuesta del usuario.
 
 ---
 
-## 4. PROTOCOLO ANTE FALLOS Y BLOQUEOS (ANÁLISIS AUTOMÁTICO)
+## 4. PROTOCOLO ANTE FALLOS Y BLOQUEOS
 
-### 4.1 Protocolo automático de reintentos (OBLIGATORIO)
+### 4.1 Protocolo estricto de reintentos (OBLIGATORIO)
 
-Cuando el análisis automático detecta un fallo (Exit Code != 0):
+Cuando un escenario falla al ejecutar:
 
 **PRIMER FALLO (Intento 1)**:
-1. **ANÁLISIS AUTOMÁTICO del error** desde la salida del terminal
-2. Extraer el mensaje de error exacto y la línea/paso que falló
-3. Identificar la causa raíz probable (frame detached, selector no encontrado, timeout, etc.)
-4. **PRESENTAR DIAGNÓSTICO AUTOMÁTICAMENTE**:
-   ```
-    Ejecución fallida - Análisis automático:
+1. Mostrar el error exacto al usuario
+2. Analizar la causa raíz
+3. **PREGUNTAR OBLIGATORIAMENTE**:
+   "He detectado el siguiente error: [descripción]
+   Causa identificada: [causa]
+   Propuesta de corrección: [solución]
    
-   Error detectado: [mensaje exacto del error]
-   Paso que falló: [nombre del paso y línea]
-   Causa identificada: [análisis de causa raíz]
-   
-   Propuesta de corrección:
-   [descripción de la solución propuesta]
-   [código modificado si aplica]
-   
-   ¿Aplicar esta corrección? (sí/no)
-   ```
-5. **ESPERAR respuesta del usuario**
-6. Solo si el usuario aprueba, aplicar la corrección
-7. **PREGUNTAR antes de reejecutar**: "¿Ejecutar nuevamente la prueba? (sí/no)"
+   ¿Aplicar esta corrección? (sí/no)"
+4. **ESPERAR respuesta del usuario**
+5. Solo si el usuario aprueba, aplicar la corrección
+6. **PREGUNTAR antes de reejecutar**: "¿Ejecutar nuevamente la prueba? (sí/no)"
 
 **SEGUNDO FALLO (Intento 2)**:
-1. **ANÁLISIS AUTOMÁTICO del nuevo error**
-2. Comparar con el error anterior para determinar si es el mismo o diferente
-3. **PRESENTAR DIAGNÓSTICO ACTUALIZADO AUTOMÁTICAMENTE**:
-   ```
-   Segundo fallo - Análisis automático:
+1. Mostrar el nuevo error al usuario
+2. Analizar si es el mismo error o uno diferente
+3. **PREGUNTAR OBLIGATORIAMENTE**:
+   "La corrección anterior no resolvió el problema.
+   Nuevo error: [descripción]
+   Propuesta alternativa: [solución]
    
-   La corrección anterior no resolvió el problema.
-   
-   Nuevo error: [mensaje exacto]
-   Comparación: [mismo error / error diferente]
-   Nueva causa identificada: [análisis actualizado]
-   
-   Propuesta alternativa:
-   [descripción de solución alternativa]
-   [código modificado si aplica]
-   
-   ¿Aplicar esta corrección alternativa? (sí/no)
-   ```
+   ¿Aplicar esta corrección alternativa? (sí/no)"
 4. **ESPERAR respuesta del usuario**
 5. Solo si el usuario aprueba, aplicar la corrección
 6. **PREGUNTAR antes de reejecutar**: "¿Ejecutar nuevamente la prueba? (sí/no)"
 
 **TERCER FALLO (Intento 3)**:
 1. **DETENER inmediatamente** cualquier intento automático
-2. **PRESENTAR DIAGNÓSTICO COMPLETO ESTRUCTURADO**:
-   ```
-   Tercer fallo consecutivo - Análisis completo:
-   
-   Historial de errores:
-   - Intento 1: [error y corrección aplicada]
-   - Intento 2: [error y corrección aplicada]  
-   - Intento 3: [error actual]
-   
-   Causa raíz probable: [análisis profundo]
-   
-   Opciones de solución:
-   A. [Corrección específica con implicaciones]
-   B. Marcar escenario como @pendiente y continuar
-   C. Requiere investigación manual / información adicional
-   
-   ¿Cómo deseas proceder? (A/B/C)
-   ```
-3. **ESPERAR respuesta del usuario**
+2. Presentar diagnóstico estructurado al usuario:
+   - Error exacto observado
+   - Historial de correcciones intentadas
+   - Causa raíz probable
+   - Opciones de solución con sus implicaciones
+3. **PREGUNTAR**: "¿Cómo deseas proceder?"
+   - Opción A: Intentar otra corrección específica
+   - Opción B: Marcar como @pendiente y continuar
+   - Opción C: Investigación manual necesaria
 4. **NO aplicar ningún cambio sin aprobación explícita**
 
-**REGLAS CRÍTICAS ACTUALIZADAS**:
-- **ANALIZAR AUTOMÁTICAMENTE** cada fallo usando Exit Code y salida del terminal
-- **PRESENTAR DIAGNÓSTICO** antes de preguntar qué hacer
+**REGLAS CRÍTICAS**:
 - **NUNCA ejecutar más de una vez sin preguntar**
 - **NUNCA asumir que una corrección funcionará**
 - **NUNCA aplicar múltiples correcciones en secuencia sin confirmación**
 - **SIEMPRE esperar respuesta del usuario antes de cada acción**
 - **SIEMPRE preguntar antes de reejecutar**
-- **NUNCA preguntar** "¿Funcionó la prueba?" - Ya está en el Exit Code
 
 ### 4.2 Protocolo de escalado ante bloqueos
 

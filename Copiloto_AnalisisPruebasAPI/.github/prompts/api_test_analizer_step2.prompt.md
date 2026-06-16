@@ -3,6 +3,7 @@ agent: "API Test Analizer"
 tools:
   ["edit/createDirectory", "edit/editFiles", "search", "execute/getTerminalOutput", "execute/runInTerminal", "search/usages"]
 description: "Analizar pruebas API existentes y proponer las pruebas faltantes siguiendo el modelo POISED"
+model: "Claude Sonnet 4.6"
 ---
 
 ## Step 2. PROCESO DE ANÁLISIS Y PROPUESTA DE MEJORAS

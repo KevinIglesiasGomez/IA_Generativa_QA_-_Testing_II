@@ -1,6 +1,6 @@
 # Generación de INFORME.md
 
-Es obligatorio generar un archivo INFORME.md comprensivo en la raíz de **${input:e2e_repo}/** siguiendo TODOS los requisitos de documentación en las instrucciones para cada conjunto de características BDD generadas. Este INFORME.md debe incluir:
+Es obligatorio generar un archivo INFORME.md comprensivo en la raíz de **${input:e2e_repo}/** siguiendo TODOS los requisitos de documentación en las instrucciones para cada conjunto de características BDD generadas. Este INFORME.md debe incluir obligatoriamente las siguientes secciones detalladas utilizando el mínimo de tokens posible, pero sin omitir información relevante:
 
 ---
 

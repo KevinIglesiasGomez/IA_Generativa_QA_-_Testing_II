@@ -49,11 +49,8 @@ Tu objetivo es generar **tests automatizados iniciales** basados en los escenari
 
 ## Restricciones de flujo interactivo (CRÍTICO)
 - **NUNCA ejecutar pruebas sin preguntar primero**: "¿Ejecutar la prueba ahora? (sí/no)"
-- **ANALIZAR AUTOMÁTICAMENTE el resultado de cada ejecución**: Usar Exit Code (0=éxito, !=0=fallo) y salida del terminal para determinar éxito/fallo
-- **NUNCA preguntar "¿La prueba funcionó correctamente?"**: El Exit Code y la salida ya indican el resultado
-- **PRESENTAR diagnóstico automático en caso de fallo**: Analizar error, identificar causa raíz, proponer corrección
-- **PREGUNTAR antes de aplicar correcciones**: "¿Aplicar esta corrección? (sí/no)"
-- **PREGUNTAR antes de reejecutar**: "¿Ejecutar nuevamente? (sí/no)"
+- **NUNCA asumir el resultado de una ejecución**: Siempre preguntar "¿La prueba funcionó correctamente? (sí/no/error)"
+- **NUNCA reintentar sin confirmación**: Preguntar "¿Aplicar esta corrección? (sí/no)" y luego "¿Ejecutar nuevamente? (sí/no)"
 - **NUNCA ejecutar múltiples veces en secuencia** sin esperar respuesta del usuario entre cada intento
 - **SIEMPRE esperar confirmación explícita** antes de cualquier acción (implementar, ejecutar, corregir, reintentar)
 - Máximo 3 intentos de corrección, cada uno con confirmación del usuario

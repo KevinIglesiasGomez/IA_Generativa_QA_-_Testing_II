@@ -1,6 +1,0 @@
-# Excepto estos archivos y directorios
-!.gitignore
-!.github/
-!.github/**
-
-!README.md
