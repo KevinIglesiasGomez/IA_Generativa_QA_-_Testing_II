@@ -57,7 +57,7 @@ Application-Exploration-Flow:
 
 #### Application-Access:
 
-1.Navigate-to-Tirea-web-app-URL:`${input:URL}`.
+1.Navigate-to-web-app-URL:`${input:URL}`.
 2.Ensure-application-loads-successfully.
 3.Analyze-HTML-structure+identify-key-elements.
 4.Click-each-link+button-to-explore-navigation-flow.

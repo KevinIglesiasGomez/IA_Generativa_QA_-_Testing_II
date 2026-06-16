@@ -57,7 +57,7 @@ Flujo de Exploración de la aplicación:
 
 #### Acceso a la aplicación:
 
-1. Navega a la URL de la aplicación web de Tirea: `${input:URL}`.
+1. Navega a la URL de la aplicación web: `${input:URL}`.
 2. Asegúrate de que la aplicación se cargue exitosamente.
 3. Analiza la estructura HTML e identifica elementos clave.
 4. Haz clic en cada enlace y botón para explorar el flujo de navegación.
