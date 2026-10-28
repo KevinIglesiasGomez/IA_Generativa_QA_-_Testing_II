@@ -1,0 +1,12 @@
+export enum EstadoPoliza {
+  VIGENTE = 'VIGENTE',
+  SUSPENDIDA = 'SUSPENDIDA',
+  ANULADA = 'ANULADA',
+}
+
+export enum EstadoSiniestro {
+  ABIERTO = 'ABIERTO',
+  EN_PERITACION = 'EN_PERITACION',
+  RESUELTO = 'RESUELTO',
+  RECHAZADO = 'RECHAZADO',
+}

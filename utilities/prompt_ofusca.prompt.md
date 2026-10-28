@@ -3,7 +3,7 @@ agent: "agent"
 tools:
   ["edit/createDirectory", "edit/editFiles", "search", "runCommands", "usages"]
 description: "Analizar ficheros prompts, agents e instructions y reducir su contenido sin perder ninguna información siguiendo el formato de ejemplo dado. El objetivo es ofuscar el contenido para que no sea legible por humanos pero que mantenga toda la información y estructura original."
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt: Ofusca el contenido de un fichero de instrucciones, agente o prompt

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Mis pólizas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [value]="tipoFiltro ?? 'TODAS'">
+    <ion-segment-button value="TODAS" (click)="cambiarFiltro(undefined)">Todas</ion-segment-button>
+    <ion-segment-button *ngFor="let t of tipos" [value]="t" (click)="cambiarFiltro(t)">{{ t }}</ion-segment-button>
+  </ion-segment>
+
+  <ion-spinner *ngIf="loading && polizas.length === 0"></ion-spinner>
+  <ion-text color="danger" *ngIf="error">No se han podido cargar las pólizas.</ion-text>
+  <ion-text *ngIf="!loading && !error && polizas.length === 0">No tienes pólizas contratadas.</ion-text>
+
+  <ion-list *ngIf="polizas.length > 0">
+    <ion-item *ngFor="let p of polizas" [routerLink]="['/polizas', p.idPoliza]" detail>
+      <ion-label>
+        <h2>{{ p.idPoliza }} - {{ p.tipo }}</h2>
+        <p>{{ p.descripcion }}</p>
+      </ion-label>
+      <ion-badge slot="end" [color]="p.estado === 'VIGENTE' ? 'success' : 'medium'">{{ p.estado }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll *ngIf="hayMas" (ionInfinite)="masPolizas($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

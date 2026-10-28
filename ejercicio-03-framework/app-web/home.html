@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas Seguros - Mis pólizas</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="barra">
+    <strong>Pruebas Seguros</strong>
+    <div>
+      <span data-testid="home-saludo" id="saludo"></span>
+      <button type="button" class="secundario" id="btnCerrarSesion" data-testid="home-cerrar-sesion">Cerrar sesión</button>
+    </div>
+  </header>
+  <main>
+    <section class="tarjeta">
+      <div class="acciones">
+        <h1 data-testid="home-titulo">Mis pólizas</h1>
+        <a class="enlace-boton" href="siniestro.html" data-testid="home-declarar-siniestro">Declarar siniestro</a>
+      </div>
+
+      <div class="campo">
+        <label for="filtroTipo">Tipo de póliza</label>
+        <select id="filtroTipo" data-testid="home-filtro-tipo">
+          <option value="">Todas</option>
+          <option value="auto">Auto</option>
+          <option value="hogar">Hogar</option>
+          <option value="vida">Vida</option>
+        </select>
+      </div>
+
+      <table data-testid="home-tabla-polizas">
+        <thead>
+          <tr><th>Número</th><th>Tipo</th><th>Descripción</th><th>Estado</th><th></th></tr>
+        </thead>
+        <tbody id="cuerpoPolizas"></tbody>
+      </table>
+      <p id="sinPolizas" class="oculto" data-testid="home-sin-polizas">No se han encontrado pólizas.</p>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    const sesion = exigirSesion();
+    const cuerpo = document.getElementById('cuerpoPolizas');
+    const sinPolizas = document.getElementById('sinPolizas');
+    const etiquetaTipo = { auto: 'Auto', hogar: 'Hogar', vida: 'Vida' };
+
+    if (sesion) {
+      document.getElementById('saludo').textContent = 'Hola, ' + sesion.nombre + ' ';
+      document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesion);
+      document.getElementById('filtroTipo').addEventListener('change', pintar);
+      pintar();
+    }
+
+    function pintar() {
+      const tipo = document.getElementById('filtroTipo').value;
+      const filas = polizasVisibles(sesion).filter((p) => !tipo || p.tipo === tipo);
+      cuerpo.innerHTML = '';
+      sinPolizas.classList.toggle('oculto', filas.length > 0);
+      filas.forEach((p) => {
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-testid', 'poliza-fila-' + p.id);
+        tr.innerHTML =
+          '<td>' + p.id + '</td>' +
+          '<td>' + etiquetaTipo[p.tipo] + '</td>' +
+          '<td>' + p.descripcion + '</td>' +
+          '<td class="estado-' + p.estado.toLowerCase() + '">' + p.estado + '</td>' +
+          '<td><a class="enlace-boton" data-testid="poliza-ver-' + p.id + '" href="poliza.html?id=' + p.id + '">Ver detalle</a></td>';
+        cuerpo.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>

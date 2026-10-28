@@ -1,0 +1,9 @@
+{
+  "idPoliza": "#string",
+  "tipo": "#string",
+  "descripcion": "#string",
+  "estado": "#string",
+  "primaAnual": "#number",
+  "fechaInicio": "#string",
+  "fechaFin": "#string"
+}

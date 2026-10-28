@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas Seguros - Iniciar sesión</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="barra"><strong>Pruebas Seguros</strong></header>
+  <main>
+    <section class="tarjeta" data-testid="login-card">
+      <h1 data-testid="login-titulo">¡Bienvenido a Pruebas Seguros!</h1>
+      <p data-testid="login-subtitulo">Accede con tus credenciales corporativas</p>
+
+      <div id="bannerError" class="banner-error oculto" role="alert" data-testid="login-banner-error"></div>
+
+      <form id="formLogin" novalidate>
+        <div class="campo" id="campoUsuario">
+          <label for="inputUsuario">Usuario</label>
+          <input type="text" id="inputUsuario" name="usuario" placeholder="Usuario" autocomplete="off" data-testid="login-usuario">
+          <div class="mensaje-error" id="errorUsuario" data-testid="login-usuario-error"></div>
+        </div>
+
+        <div class="campo" id="campoPassword">
+          <label for="inputPassword">Contraseña</label>
+          <input type="password" id="inputPassword" name="password" placeholder="Contraseña" autocomplete="off" data-testid="login-password">
+          <button type="button" class="toggle-pass" id="btnVerPassword" aria-label="Mostrar contraseña" data-testid="login-ver-password">Ver</button>
+          <div class="mensaje-error" id="errorPassword" data-testid="login-password-error"></div>
+        </div>
+
+        <button type="submit" class="primario" id="btnLogin" data-testid="login-submit">Iniciar sesión</button>
+      </form>
+
+      <p><a href="recuperar.html" id="enlaceRecuperar" data-testid="login-recuperar">¿Olvidaste tu contraseña?</a></p>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    const form = document.getElementById('formLogin');
+    const inputUsuario = document.getElementById('inputUsuario');
+    const inputPassword = document.getElementById('inputPassword');
+    const btnLogin = document.getElementById('btnLogin');
+    const banner = document.getElementById('bannerError');
+
+    function marcarError(campoId, errorId, mensaje) {
+      document.getElementById(campoId).classList.toggle('error', Boolean(mensaje));
+      document.getElementById(errorId).textContent = mensaje || '';
+    }
+
+    document.getElementById('btnVerPassword').addEventListener('click', () => {
+      const visible = inputPassword.type === 'text';
+      inputPassword.type = visible ? 'password' : 'text';
+      document.getElementById('btnVerPassword').textContent = visible ? 'Ver' : 'Ocultar';
+    });
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      banner.classList.add('oculto');
+      const usuario = inputUsuario.value.trim();
+      const password = inputPassword.value;
+      let valido = true;
+
+      if (!usuario) {
+        marcarError('campoUsuario', 'errorUsuario', 'El usuario está vacío. Introduce tus datos e inténtalo de nuevo.');
+        valido = false;
+      } else if (!/^[A-Za-z0-9]{1,8}$/.test(usuario)) {
+        marcarError('campoUsuario', 'errorUsuario', 'El formato del usuario es incorrecto. Revisa tus datos e inténtalo de nuevo.');
+        valido = false;
+      } else {
+        marcarError('campoUsuario', 'errorUsuario', '');
+      }
+
+      if (!password) {
+        marcarError('campoPassword', 'errorPassword', 'La contraseña está vacía. Introduce tus datos e inténtalo de nuevo.');
+        valido = false;
+      } else {
+        marcarError('campoPassword', 'errorPassword', '');
+      }
+
+      if (!valido) return;
+
+      btnLogin.disabled = true;
+      btnLogin.textContent = 'Iniciando sesión…';
+      setTimeout(() => {
+        const datos = USUARIOS[usuario];
+        if (datos && datos.password === password) {
+          guardarSesion(usuario);
+          window.location.href = 'home.html';
+          return;
+        }
+        banner.textContent = 'Usuario o contraseña incorrectos. Inténtalo de nuevo.';
+        banner.classList.remove('oculto');
+        btnLogin.disabled = false;
+        btnLogin.textContent = 'Iniciar sesión';
+      }, 500);
+    });
+  </script>
+</body>
+</html>

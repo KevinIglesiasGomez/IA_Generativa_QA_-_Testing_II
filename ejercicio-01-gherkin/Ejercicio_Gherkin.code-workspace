@@ -1,0 +1,6 @@
+{
+	"folders": [
+		{ "name": "ejercicio-01-gherkin", "path": "." },
+		{ "name": "Asset_Gherkin", "path": "../Asset_Gherkin" }
+	]
+}

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/polizas"></ion-back-button></ion-buttons>
+    <ion-title>Detalle de siniestro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <ion-text color="danger" *ngIf="error">No se ha podido cargar el siniestro.</ion-text>
+
+  <ion-list *ngIf="siniestro">
+    <ion-item><ion-label>Referencia</ion-label><ion-note slot="end">{{ siniestro.referencia }}</ion-note></ion-item>
+    <ion-item><ion-label>Tipo</ion-label><ion-note slot="end">{{ siniestro.tipo }}</ion-note></ion-item>
+    <ion-item><ion-label>Estado</ion-label><ion-note slot="end">{{ siniestro.estado }}</ion-note></ion-item>
+    <ion-item><ion-label>Fecha</ion-label><ion-note slot="end">{{ siniestro.fechaSiniestro }}</ion-note></ion-item>
+    <ion-item><ion-label>Descripción</ion-label><ion-note slot="end">{{ siniestro.descripcion }}</ion-note></ion-item>
+  </ion-list>
+  <ion-text color="medium" *ngIf="estaCerrado">Este siniestro está cerrado y no admite cambios.</ion-text>
+</ion-content>

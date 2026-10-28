@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas Seguros - Detalle de póliza</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="barra"><strong>Pruebas Seguros</strong></header>
+  <main>
+    <section class="tarjeta">
+      <h1 data-testid="poliza-titulo">Detalle de póliza</h1>
+      <div id="detalle"></div>
+      <p id="noEncontrada" class="oculto" data-testid="poliza-no-encontrada">La póliza solicitada no existe o no tienes acceso.</p>
+      <a class="enlace-boton" href="home.html" data-testid="poliza-volver">Volver a Mis pólizas</a>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    const sesion = exigirSesion();
+    if (sesion) {
+      const id = new URLSearchParams(window.location.search).get('id');
+      const poliza = polizasVisibles(sesion).find((p) => p.id === id);
+      if (!poliza) {
+        document.getElementById('noEncontrada').classList.remove('oculto');
+      } else {
+        document.getElementById('detalle').innerHTML =
+          '<table>' +
+          '<tr><th>Número</th><td data-testid="poliza-numero">' + poliza.id + '</td></tr>' +
+          '<tr><th>Tipo</th><td data-testid="poliza-tipo">' + poliza.tipo + '</td></tr>' +
+          '<tr><th>Descripción</th><td data-testid="poliza-descripcion">' + poliza.descripcion + '</td></tr>' +
+          '<tr><th>Prima anual</th><td data-testid="poliza-prima">' + formatoEuros(poliza.prima) + '</td></tr>' +
+          '<tr><th>Estado</th><td data-testid="poliza-estado">' + poliza.estado + '</td></tr>' +
+          '<tr><th>Vigencia</th><td data-testid="poliza-vigencia">' + poliza.desde + ' a ' + poliza.hasta + '</td></tr>' +
+          '</table>';
+      }
+    }
+  </script>
+</body>
+</html>

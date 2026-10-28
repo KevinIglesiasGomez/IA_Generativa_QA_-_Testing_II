@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas Seguros - Declarar siniestro</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="barra"><strong>Pruebas Seguros</strong></header>
+  <main>
+    <section class="tarjeta">
+      <h1 data-testid="siniestro-titulo">Declarar siniestro</h1>
+      <div id="confirmacion" class="banner-ok oculto" role="status" data-testid="siniestro-confirmacion"></div>
+
+      <form id="formSiniestro" novalidate>
+        <div class="campo" id="campoPoliza">
+          <label for="selPoliza">Póliza</label>
+          <select id="selPoliza" data-testid="siniestro-poliza"></select>
+          <div class="mensaje-error" data-testid="siniestro-poliza-error"></div>
+        </div>
+
+        <div class="campo" id="campoTipo">
+          <label for="selTipo">Tipo de siniestro</label>
+          <select id="selTipo" data-testid="siniestro-tipo">
+            <option value="">Selecciona una opción</option>
+            <option value="colision">Colisión</option>
+            <option value="robo">Robo</option>
+            <option value="incendio">Incendio</option>
+            <option value="agua">Daños por agua</option>
+          </select>
+          <div class="mensaje-error" data-testid="siniestro-tipo-error"></div>
+        </div>
+
+        <div class="campo" id="campoFecha">
+          <label for="inputFecha">Fecha del siniestro</label>
+          <input type="date" id="inputFecha" data-testid="siniestro-fecha">
+          <div class="mensaje-error" data-testid="siniestro-fecha-error"></div>
+        </div>
+
+        <div class="campo" id="campoDescripcion">
+          <label for="txtDescripcion">Descripción (20 a 500 caracteres)</label>
+          <textarea id="txtDescripcion" rows="4" data-testid="siniestro-descripcion"></textarea>
+          <div class="mensaje-error" data-testid="siniestro-descripcion-error"></div>
+        </div>
+
+        <button type="submit" class="primario" data-testid="siniestro-enviar">Enviar declaración</button>
+        <a class="enlace-boton" href="home.html" data-testid="siniestro-cancelar">Cancelar</a>
+      </form>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    const sesion = exigirSesion();
+    const form = document.getElementById('formSiniestro');
+    const hoy = new Date().toISOString().slice(0, 10);
+
+    function marcar(campoId, mensaje) {
+      const campo = document.getElementById(campoId);
+      campo.classList.toggle('error', Boolean(mensaje));
+      campo.querySelector('.mensaje-error').textContent = mensaje || '';
+    }
+
+    if (sesion) {
+      const select = document.getElementById('selPoliza');
+      select.innerHTML = '<option value="">Selecciona una póliza</option>';
+      polizasVisibles(sesion)
+        .filter((p) => p.estado === 'Vigente')
+        .forEach((p) => {
+          const op = document.createElement('option');
+          op.value = p.id;
+          op.textContent = p.id + ' - ' + p.descripcion;
+          select.appendChild(op);
+        });
+      document.getElementById('inputFecha').max = hoy;
+    }
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const poliza = document.getElementById('selPoliza').value;
+      const tipo = document.getElementById('selTipo').value;
+      const fecha = document.getElementById('inputFecha').value;
+      const descripcion = document.getElementById('txtDescripcion').value.trim();
+      let valido = true;
+
+      marcar('campoPoliza', poliza ? '' : 'Selecciona una póliza.');
+      marcar('campoTipo', tipo ? '' : 'Selecciona el tipo de siniestro.');
+      if (!poliza) valido = false;
+      if (!tipo) valido = false;
+
+      if (!fecha) {
+        marcar('campoFecha', 'Indica la fecha del siniestro.');
+        valido = false;
+      } else if (fecha > hoy) {
+        marcar('campoFecha', 'La fecha del siniestro no puede ser futura.');
+        valido = false;
+      } else {
+        marcar('campoFecha', '');
+      }
+
+      if (descripcion.length < 20 || descripcion.length > 500) {
+        marcar('campoDescripcion', 'La descripción debe tener entre 20 y 500 caracteres.');
+        valido = false;
+      } else {
+        marcar('campoDescripcion', '');
+      }
+
+      if (!valido) return;
+
+      const referencia = 'SIN-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
+      const caja = document.getElementById('confirmacion');
+      caja.textContent = 'Siniestro registrado con referencia ' + referencia + '.';
+      caja.classList.remove('oculto');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

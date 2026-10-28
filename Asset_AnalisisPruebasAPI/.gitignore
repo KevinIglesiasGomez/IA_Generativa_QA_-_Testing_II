@@ -1,0 +1,10 @@
+# Ignorar todo en la raíz
+/*
+
+# Excepciones: permitir estos archivos y directorios
+!/.gitignore
+!/.github/
+!Mini_AnalisisPruebasAPI/
+!Mini_AnalisisPruebasAPI/**
+
+!README.md

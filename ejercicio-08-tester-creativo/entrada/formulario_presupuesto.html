@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas Seguros - Presupuesto de seguro de auto</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f5fa; margin: 0; }
+    main { max-width: 520px; margin: 24px auto; background: #fff; padding: 24px; border-radius: 8px; }
+    label { display: block; margin-top: 12px; font-size: 14px; }
+    input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+    .error { color: #c62828; font-size: 13px; min-height: 16px; }
+    button { margin-top: 16px; padding: 10px 18px; background: #0b3d91; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+    #resultado { margin-top: 16px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Presupuesto de seguro de auto</h1>
+    <form id="formPresupuesto" novalidate>
+      <label for="matricula">Matrícula</label>
+      <input id="matricula" name="matricula" autocomplete="off">
+      <div class="error" id="err-matricula"></div>
+
+      <label for="fechaNacimiento">Fecha de nacimiento</label>
+      <input id="fechaNacimiento" name="fechaNacimiento" type="date">
+      <div class="error" id="err-fechaNacimiento"></div>
+
+      <label for="fechaCarnet">Fecha del carné</label>
+      <input id="fechaCarnet" name="fechaCarnet" type="date">
+      <div class="error" id="err-fechaCarnet"></div>
+
+      <label for="codigoPostal">Código postal</label>
+      <input id="codigoPostal" name="codigoPostal" inputmode="numeric">
+      <div class="error" id="err-codigoPostal"></div>
+
+      <label for="kilometros">Kilómetros anuales</label>
+      <input id="kilometros" name="kilometros">
+      <div class="error" id="err-kilometros"></div>
+
+      <label for="franquicia">Franquicia</label>
+      <select id="franquicia" name="franquicia">
+        <option value="0">0 €</option>
+        <option value="150" selected>150 €</option>
+        <option value="300">300 €</option>
+        <option value="500">500 €</option>
+      </select>
+
+      <label for="adicionales">Conductores adicionales</label>
+      <input id="adicionales" name="adicionales" type="number" value="0" min="0" max="3">
+      <div class="error" id="err-adicionales"></div>
+
+      <label for="cupon">Cupón (opcional)</label>
+      <input id="cupon" name="cupon" autocomplete="off">
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="text">
+      <div class="error" id="err-email"></div>
+
+      <button type="submit" id="btnCalcular">Calcular</button>
+    </form>
+    <div id="resultado" role="status"></div>
+  </main>
+
+  <script src="validaciones.js"></script>
+  <script>
+    const form = document.getElementById('formPresupuesto');
+
+    function error(campo, mensaje) {
+      document.getElementById('err-' + campo).textContent = mensaje || '';
+      return Boolean(mensaje);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = Object.fromEntries(new FormData(form));
+      let hayErrores = false;
+
+      hayErrores = error('matricula', validarMatricula(v.matricula) ? '' : 'Matrícula no válida.') || hayErrores;
+      hayErrores = error('fechaNacimiento', v.fechaNacimiento && calcularEdad(v.fechaNacimiento) >= 18 ? '' : 'Debes ser mayor de edad.') || hayErrores;
+      hayErrores = error('fechaCarnet', v.fechaCarnet && v.fechaNacimiento && validarFechaCarnet(v.fechaCarnet, v.fechaNacimiento) ? '' : 'Fecha de carné no válida.') || hayErrores;
+      hayErrores = error('codigoPostal', validarCodigoPostal(v.codigoPostal) ? '' : 'Código postal no válido.') || hayErrores;
+      hayErrores = error('kilometros', validarKilometros(v.kilometros) ? '' : 'Kilómetros entre 0 y 60000.') || hayErrores;
+      const adicionales = Number(v.adicionales);
+      hayErrores = error('adicionales', adicionales >= 0 && adicionales <= 3 ? '' : 'Entre 0 y 3 conductores.') || hayErrores;
+      hayErrores = error('email', validarEmail(v.email) ? '' : 'Email no válido.') || hayErrores;
+      if (hayErrores) return;
+
+      const resultado = calcularPrima({
+        edad: calcularEdad(v.fechaNacimiento),
+        kilometros: parseInt(v.kilometros, 10),
+        franquicia: Number(v.franquicia),
+        adicionales,
+        cupon: v.cupon.trim(),
+      });
+
+      document.getElementById('resultado').innerHTML =
+        'Prima anual estimada: ' + resultado.prima.toFixed(2) + ' €<br>' +
+        'Hemos enviado una copia a ' + v.email +
+        (resultado.cuponValido ? '' : '<br>El cupón indicado no es válido.');
+    });
+  </script>
+</body>
+</html>

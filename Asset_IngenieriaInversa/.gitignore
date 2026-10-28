@@ -1,0 +1,16 @@
+# Ignorar todo
+*
+*/
+
+# Permitir el archivo .gitignore
+!.gitignore
+
+# Permitir únicamente el directorio .github, la versión reducida Mini y su contenido
+!.github/
+!.github/**
+!Mini_IngenieriaInversa/
+!Mini_IngenieriaInversa/**
+
+# Permitir archivos de configuración del workspace
+!Demo_IngenieriaInversa.code-workspace
+!README.md

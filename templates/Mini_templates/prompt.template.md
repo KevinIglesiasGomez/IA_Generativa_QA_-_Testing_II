@@ -2,7 +2,7 @@
 agent: "AgentName"
 tools: ["edit/editFiles", "search", "runCommands"]
 description: "Prompt-purpose"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt:Prompt-Name

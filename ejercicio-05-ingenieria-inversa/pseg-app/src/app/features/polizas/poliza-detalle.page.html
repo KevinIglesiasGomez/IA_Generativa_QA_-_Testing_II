@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/polizas"></ion-back-button></ion-buttons>
+    <ion-title>Detalle de póliza</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <ion-text *ngIf="noEncontrada">La póliza solicitada no existe o no tienes acceso.</ion-text>
+
+  <ng-container *ngIf="poliza">
+    <ion-list>
+      <ion-item><ion-label>Número</ion-label><ion-note slot="end">{{ poliza.idPoliza }}</ion-note></ion-item>
+      <ion-item><ion-label>Tipo</ion-label><ion-note slot="end">{{ poliza.tipo }}</ion-note></ion-item>
+      <ion-item><ion-label>Estado</ion-label><ion-note slot="end">{{ poliza.estado }}</ion-note></ion-item>
+      <ion-item><ion-label>Prima anual</ion-label><ion-note slot="end">{{ poliza.primaAnual | currency:'EUR' }}</ion-note></ion-item>
+      <ion-item><ion-label>Vigencia</ion-label><ion-note slot="end">{{ poliza.fechaInicio }} - {{ poliza.fechaFin }}</ion-note></ion-item>
+    </ion-list>
+
+    <ion-button expand="block" [routerLink]="['/siniestros/declarar']" [queryParams]="{ poliza: poliza.idPoliza }"
+                *ngIf="puedeDeclararSiniestro">Declarar siniestro</ion-button>
+    <ion-text color="medium" *ngIf="!puedeDeclararSiniestro">Solo se pueden declarar siniestros en pólizas vigentes.</ion-text>
+
+    <ion-list-header>Siniestros</ion-list-header>
+    <ion-text *ngIf="siniestros.length === 0">Esta póliza no tiene siniestros.</ion-text>
+    <ion-item *ngFor="let s of siniestros">
+      <ion-label>{{ s.referencia }} - {{ s.tipo }}</ion-label>
+      <ion-badge slot="end">{{ s.estado }}</ion-badge>
+    </ion-item>
+  </ng-container>
+</ion-content>

@@ -3,7 +3,7 @@ agent: "agent"
 tools:
   ["edit/createDirectory", "edit/editFiles", "search", "runCommands", "usages"]
 description: "Analyze-prompts,agents+instructions-files-and-reduce-content-without-losing-any-information-following-given-example-format.Goal:obfuscate-content-so-not-human-readable-but-maintains-all-original-information+structure."
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt:Obfuscate-Instruction-File-Content,Agent-or-Prompt

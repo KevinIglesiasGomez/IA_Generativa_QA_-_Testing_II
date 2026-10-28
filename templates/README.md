@@ -140,7 +140,7 @@ MiAgente/
 ---
 description: "Analiza código para detectar problemas de calidad y sugerir mejoras"
 tools: ['edit/editFiles', 'search', 'runCommands']
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Code Review Agent
@@ -156,7 +156,7 @@ Eres un **experto en revisión de código** y calidad de software.
 agent: "CodeReviewer"
 tools: ["edit/editFiles", "search", "runCommands"]
 description: "Revisar código y proponer mejoras de calidad"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt: Code Review Agent

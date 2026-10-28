@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: Pruebas Seguros API
+  version: 1.0.0
+  description: API de pólizas y siniestros de Pruebas Seguros (demostración).
+servers:
+  - url: http://localhost:3000/api/v1
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      summary: Estado del servicio
+      security: []
+      responses:
+        '200':
+          description: Servicio operativo
+  /auth/login:
+    post:
+      summary: Iniciar sesión
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [usuario, password]
+              properties:
+                usuario: { type: string, pattern: '^[A-Za-z0-9]{1,8}$' }
+                password: { type: string }
+      responses:
+        '200':
+          description: Sesión creada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+                  expiresIn: { type: integer, description: Segundos }
+                  nombre: { type: string }
+                  perfil: { type: string, enum: [CLIENTE, AGENTE] }
+        '400': { description: Cuerpo inválido o campos obligatorios ausentes }
+        '401': { description: Credenciales incorrectas }
+  /polizas:
+    get:
+      summary: Listar las pólizas visibles para el usuario
+      parameters:
+        - { name: tipo, in: query, schema: { type: string, enum: [AUTO, HOGAR, VIDA] } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: size, in: query, schema: { type: integer, minimum: 1, maximum: 50, default: 10 } }
+      responses:
+        '200':
+          description: Página de pólizas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total: { type: integer }
+                  items:
+                    type: array
+                    items: { $ref: '#/components/schemas/Poliza' }
+        '400': { description: Parámetros inválidos }
+        '401': { description: Sin token válido }
+  /polizas/{idPoliza}:
+    get:
+      summary: Detalle de una póliza del usuario
+      parameters:
+        - { name: idPoliza, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Póliza
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Poliza' }
+        '401': { description: Sin token válido }
+        '403': { description: La póliza pertenece a otro cliente }
+        '404': { description: La póliza no existe }
+  /siniestros:
+    get:
+      summary: Listar siniestros
+      parameters:
+        - { name: polizaId, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Siniestros del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Siniestro' }
+        '401': { description: Sin token válido }
+    post:
+      summary: Declarar un siniestro
+      description: Solo sobre pólizas VIGENTE del propio usuario.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [polizaId, tipo, fecha, descripcion]
+              properties:
+                polizaId: { type: string }
+                tipo: { type: string, enum: [COLISION, ROBO, INCENDIO, AGUA] }
+                fecha: { type: string, format: date, description: No puede ser futura }
+                descripcion: { type: string, minLength: 20, maxLength: 500 }
+      responses:
+        '201':
+          description: Siniestro creado
+          headers:
+            Location: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Siniestro' }
+        '400': { description: Datos inválidos }
+        '401': { description: Sin token válido }
+        '403': { description: La póliza pertenece a otro cliente }
+        '404': { description: La póliza no existe }
+        '409': { description: Siniestro duplicado o póliza no vigente }
+  /siniestros/{idSiniestro}:
+    get:
+      summary: Detalle de un siniestro
+      parameters:
+        - { name: idSiniestro, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Siniestro
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Siniestro' }
+        '401': { description: Sin token válido }
+        '404': { description: El siniestro no existe }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Poliza:
+      type: object
+      properties:
+        idPoliza: { type: string }
+        tipo: { type: string, enum: [AUTO, HOGAR, VIDA] }
+        descripcion: { type: string }
+        estado: { type: string, enum: [VIGENTE, SUSPENDIDA, ANULADA] }
+        primaAnual: { type: number }
+        fechaInicio: { type: string, format: date }
+        fechaFin: { type: string, format: date }
+    Siniestro:
+      type: object
+      properties:
+        idSiniestro: { type: string }
+        referencia: { type: string }
+        polizaId: { type: string }
+        tipo: { type: string }
+        fecha: { type: string, format: date }
+        descripcion: { type: string }
+        estado: { type: string, enum: [ABIERTO, EN_PERITACION, RESUELTO, RECHAZADO] }

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Declarar siniestro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="success" *ngIf="referencia">Siniestro registrado con referencia {{ referencia }}.</ion-text>
+  <ion-text color="danger" *ngIf="errorServidor">{{ errorServidor }}</ion-text>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()" *ngIf="!referencia">
+    <ion-select formControlName="idPoliza" label="Póliza" labelPlacement="floating">
+      <ion-select-option *ngFor="let p of polizasVigentes" [value]="p.idPoliza">{{ p.idPoliza }} - {{ p.descripcion }}</ion-select-option>
+    </ion-select>
+
+    <ion-select formControlName="tipo" label="Tipo de siniestro" labelPlacement="floating">
+      <ion-select-option *ngFor="let t of tipos" [value]="t">{{ t }}</ion-select-option>
+    </ion-select>
+
+    <ion-input type="date" formControlName="fechaSiniestro" label="Fecha del siniestro" labelPlacement="floating" [max]="hoy"></ion-input>
+    <ion-note color="danger" *ngIf="form.controls.fechaSiniestro.hasError('futura')">La fecha del siniestro no puede ser futura.</ion-note>
+    <ion-note color="danger" *ngIf="form.controls.fechaSiniestro.hasError('fueraDePlazo')">
+      Han transcurrido más de {{ form.controls.fechaSiniestro.errors?.['fueraDePlazo'] }} días desde el siniestro.
+    </ion-note>
+
+    <ion-textarea formControlName="descripcion" label="Descripción" labelPlacement="floating" [counter]="true" maxlength="500"></ion-textarea>
+    <ion-note color="danger" *ngIf="form.controls.descripcion.touched && form.controls.descripcion.invalid">
+      La descripción debe tener entre 20 y 500 caracteres.
+    </ion-note>
+
+    <ion-button type="submit" expand="block" [disabled]="enviando">Enviar declaración</ion-button>
+    <ion-button fill="clear" (click)="cancelar()">Cancelar</ion-button>
+  </form>
+</ion-content>

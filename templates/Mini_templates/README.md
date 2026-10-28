@@ -138,7 +138,7 @@ MyAgent/
 ---
 description: "Analyzes-code-to-detect-quality-issues+suggest-improvements"
 tools: ['edit/editFiles', 'search', 'runCommands']
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Code-Review-Agent
@@ -154,7 +154,7 @@ You-are-**code-review+software-quality-expert**.
 agent: "CodeReviewer"
 tools: ["edit/editFiles", "search", "runCommands"]
 description: "Review-code+propose-quality-improvements"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt:Code-Review-Agent

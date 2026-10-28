@@ -2,7 +2,7 @@
 agent: "NombreDelAgente"
 tools: ["edit/editFiles", "search", "runCommands"]
 description: "Propósito del prompt"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt: Nombre del Prompt

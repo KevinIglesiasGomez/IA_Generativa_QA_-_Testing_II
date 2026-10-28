@@ -1,0 +1,6 @@
+{
+	"folders": [
+		{ "name": "ejercicio-02-casos-duplicados", "path": "." },
+		{ "name": "Asset_CasosDuplicadosDetector", "path": "../Asset_CasosDuplicadosDetector" }
+	]
+}

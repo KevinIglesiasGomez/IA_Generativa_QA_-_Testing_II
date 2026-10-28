@@ -1,0 +1,6 @@
+# Excepciones: permitir estos archivos y directorios
+/*
+!.github/
+!.gitignore
+!Mini_AutomatizacionPlaywright/
+!Mini_AutomatizacionPlaywright/**

@@ -1,7 +1,7 @@
 ---
 description: "Descripción breve de qué hace este agente"
 tools: ['edit/editFiles', 'search', 'runCommands']
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Nombre del Agente

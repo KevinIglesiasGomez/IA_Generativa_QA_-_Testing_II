@@ -1,0 +1,10 @@
+.env.xray
+reports/
+__pycache__/
+*.pyc
+
+# Material de demo manual contra Jira real (solo local)
+tests/demo.feature
+tests/crear_reporte.py
+tests/borrar_prueba.py
+tests/

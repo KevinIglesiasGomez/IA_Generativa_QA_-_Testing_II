@@ -1,0 +1,10 @@
+{
+  "name": "pseg-mock-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API de demostración de Pruebas Seguros para el ejercicio de análisis de pruebas API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

@@ -1,0 +1,13 @@
+# Ignorar todo
+*
+*/
+
+# Excepciones: permitir estos archivos y directorios
+!.github/
+!.github/**
+!Mini_SyntheticData/
+!Mini_SyntheticData/**
+
+
+# No ignorar el .gitignore
+!.gitignore

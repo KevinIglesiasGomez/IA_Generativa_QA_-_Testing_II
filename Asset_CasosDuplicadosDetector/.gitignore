@@ -1,0 +1,11 @@
+# Ignorar todo
+*
+
+# Excepciones: permitir estos archivos y directorios
+!.github/
+!.github/**
+!Mini_CasosDuplicadosDetector/
+!Mini_CasosDuplicadosDetector/**
+
+# Permitir el propio .gitignore
+!.gitignore

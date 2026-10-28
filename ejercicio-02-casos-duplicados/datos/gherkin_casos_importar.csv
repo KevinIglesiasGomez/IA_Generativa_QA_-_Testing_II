@@ -1,0 +1,55 @@
+"Issue Id","Test Summary","Description","Gherkin definition","Component","Links"
+"G-001","Login correcto con credenciales válidas","Un usuario registrado accede a la app con usuario y contraseña correctos","Dado un usuario no logado en la vista LOGIN
+Cuando introduce un usuario y una contraseña válidos
+Y pulsa el botón Iniciar sesión
+Entonces accede a la vista HOME","Login","tests HU-LOGIN-1"
+"G-002","Error al intentar iniciar sesión sin informar el usuario","Se valida el campo usuario vacío","Dado un usuario no logado en la vista LOGIN
+Cuando pulsa Iniciar sesión con el campo usuario vacío
+Entonces se resalta el campo usuario con error
+Y se muestra el mensaje ""El usuario está vacío. Introduce tus datos e inténtalo de nuevo.""","Login","tests HU-LOGIN-1"
+"G-003","Se impide iniciar sesión cuando la contraseña no se ha introducido","Se valida el campo contraseña vacío","Dado un usuario no logado en la vista LOGIN
+Cuando pulsa Iniciar sesión con el campo contraseña vacío
+Entonces se muestra el mensaje ""La contraseña está vacía. Introduce tus datos e inténtalo de nuevo.""","Login","tests HU-LOGIN-1"
+"G-004","Usuario precargado tras sesión anterior","El usuario del último login exitoso se recupera del almacenamiento seguro","Dado un usuario no logado con un login exitoso previo
+Cuando termina de cargar el splash
+Entonces la vista LOGIN muestra el campo usuario relleno","Login","tests HU-LOGIN-1"
+"G-005","Cierre de la app desde el diálogo de dispositivo inseguro","Se cierra la app al aceptar el aviso de dispositivo modificado","Dado que se ha detectado un dispositivo inseguro
+Y se muestra el diálogo de dispositivo inseguro
+Cuando el usuario pulsa Aceptar
+Entonces la app se cierra completamente","Splash","tests HU-SPLASH-1"
+"G-006","Mostrar diálogo de falta de conexión en el arranque","Al arrancar sin red se informa al usuario","Dado un dispositivo sin conexión a internet
+Cuando el usuario accede a la app
+Entonces se muestra el diálogo ""Revisa tu conexión"" sobre la vista LOGIN","Splash","tests HU-SPLASH-1"
+"G-007","Usuario con formato incorrecto por exceso de longitud","El usuario solo admite caracteres alfanuméricos de 1 a 8","Dado un usuario no logado en la vista LOGIN
+Cuando introduce un usuario de 9 caracteres y una contraseña
+Y pulsa Iniciar sesión
+Entonces se muestra el mensaje ""El formato del usuario es incorrecto. Revisa tus datos e inténtalo de nuevo.""","Login","tests HU-LOGIN-1"
+"G-008","Reintentar la conexión desde el diálogo de sin conexión","Al pulsar Reintentar se repite el flujo del splash desde el principio","Dado que se muestra el diálogo ""Revisa tu conexión""
+Cuando el usuario pulsa Reintentar
+Entonces se reinicia el flujo de comprobaciones del splash","Splash","tests HU-SPLASH-1"
+"G-009","Autologado con token caducado redirige al login","Un token de sesión expirado no permite el acceso directo","Dado un usuario con un token de sesión caducado
+Cuando termina de cargar el splash
+Entonces se muestra la vista LOGIN","Login","tests HU-LOGIN-3"
+"G-010","Preselección de tasación con matrícula en formato válido","Se acepta una matrícula con 4 dígitos y 3 consonantes","Dado un agente en la vista de tasación
+Cuando informa la matrícula ""1234BCD""
+Y solicita la preselección
+Entonces se muestra el resultado de la preselección","Tasación","tests HU-TAS-1"
+"G-011","Matrícula con formato incorrecto muestra error","No se permite tasar con matrícula inválida","Dado un agente en la vista de tasación
+Cuando informa la matrícula ""12AB""
+Y solicita la preselección
+Entonces se muestra un error de formato de matrícula","Tasación","tests HU-TAS-1"
+"G-012","Visualizar la contraseña al pulsar el icono del ojo","El usuario puede revelar la contraseña temporalmente","Dado un usuario en la vista LOGIN con la contraseña introducida
+Cuando pulsa el icono del ojo
+Entonces la contraseña se muestra en texto claro
+Y el icono deja de aparecer tachado","Login","tests HU-LOGIN-1"
+"G-013","Bloqueo de la pantalla durante el inicio de sesión","Mientras se procesa el login no se permite interactuar","Dado un usuario con credenciales válidas en la vista LOGIN
+Cuando pulsa Iniciar sesión
+Entonces el botón muestra ""Iniciando sesión…""
+Y se bloquea la interacción con toda la pantalla","Login","tests HU-LOGIN-1"
+"G-014","Cerrar sesión desde el menú","El usuario cierra su sesión y vuelve al login","Dado un usuario logado en la vista HOME
+Cuando abre el menú y pulsa Cerrar sesión
+Entonces se elimina la sesión
+Y se muestra la vista LOGIN","Home","tests HU-HOME-2"
+"G-015","Recuperación de contraseña desde el enlace del login","El enlace abre el proceso de recuperación en un navegador externo","Dado un usuario no logado en la vista LOGIN
+Cuando pulsa el enlace ""¿Olvidaste tu contraseña?""
+Entonces se abre la URL de recuperación en un navegador externo","Login","tests HU-LOGIN-1"

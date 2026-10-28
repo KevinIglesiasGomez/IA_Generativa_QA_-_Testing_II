@@ -3,7 +3,7 @@ agent: "agent"
 tools:
   ["edit/createDirectory", "edit/editFiles", "search", "execute/getTerminalOutput", "execute/runInTerminal", "read/terminalLastCommand", "read/terminalSelection", "search/usages"]
 description: "Analizar ficheros prompts, agents e instructions y reducir palabras redundantes, formato innecesario y frases repetitivas (verbose) preservando toda la información semántica sin alterar el significado original. El objetivo es que su lectura consuma la mínima cantidad de tokens posible siguiendo el formato de ejemplo dado"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt: Reduce el verbose de un copiloto  

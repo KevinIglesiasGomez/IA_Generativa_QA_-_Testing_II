@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Tasación de vehículos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="solicitar()">
+    <ion-input formControlName="matricula" label="Matrícula" labelPlacement="floating" maxlength="7"></ion-input>
+    <ion-note color="danger" *ngIf="form.controls.matricula.touched && form.controls.matricula.invalid">
+      El formato de la matrícula es incorrecto. Usa 4 números y 3 letras.
+    </ion-note>
+
+    <ion-input type="date" formControlName="fechaMatriculacion" label="Fecha de matriculación" labelPlacement="floating"></ion-input>
+    <ion-note color="danger" *ngIf="form.controls.fechaMatriculacion.hasError('futura')">La fecha de matriculación no puede ser futura.</ion-note>
+
+    <ion-input type="number" formControlName="kilometros" label="Kilómetros" labelPlacement="floating"></ion-input>
+    <ion-note color="danger" *ngIf="form.controls.kilometros.invalid">Los kilómetros deben estar entre 0 y 300000.</ion-note>
+
+    <ion-button type="submit" expand="block" [disabled]="consultando">Solicitar preselección</ion-button>
+  </form>
+
+  <ion-text color="danger" *ngIf="errorServidor">No se ha podido realizar la preselección.</ion-text>
+
+  <ion-card *ngIf="respuesta">
+    <ion-card-header>
+      <ion-card-title [ngSwitch]="respuesta.resultado">
+        <span *ngSwitchCase="resultados.ACEPTADA">Preselección aceptada</span>
+        <span *ngSwitchCase="resultados.REVISION_MANUAL">Pendiente de revisión manual</span>
+        <span *ngSwitchCase="resultados.RECHAZADA">Vehículo no asegurable</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="respuesta.primaEstimada">Prima estimada: {{ respuesta.primaEstimada | currency:'EUR' }}</p>
+      <p *ngIf="respuesta.motivo">{{ respuesta.motivo }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

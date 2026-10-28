@@ -1,0 +1,23 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f2f5fa; color: #1b2a41; }
+header.barra { background: #0b3d91; color: #fff; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+main { max-width: 760px; margin: 24px auto; padding: 0 16px; }
+.tarjeta { background: #fff; border-radius: 8px; padding: 24px; box-shadow: 0 1px 4px rgba(0, 0, 0, .15); }
+.campo { margin-bottom: 16px; position: relative; }
+.campo label { display: block; font-size: 14px; margin-bottom: 4px; }
+.campo input, .campo select, .campo textarea { width: 100%; padding: 10px; border: 1px solid #8a94a6; border-radius: 4px; font-size: 16px; }
+.campo.error input, .campo.error select, .campo.error textarea { border-color: #c62828; background: #fdecea; }
+.mensaje-error { color: #c62828; font-size: 13px; margin-top: 4px; min-height: 16px; }
+.banner-error { background: #c62828; color: #fff; padding: 10px; border-radius: 4px; margin-bottom: 16px; }
+.banner-ok { background: #2e7d32; color: #fff; padding: 10px; border-radius: 4px; margin-bottom: 16px; }
+.oculto { display: none; }
+button.primario { background: #0b3d91; color: #fff; border: 0; padding: 12px 20px; border-radius: 4px; font-size: 16px; cursor: pointer; }
+button.primario:disabled { background: #8a94a6; cursor: not-allowed; }
+button.secundario, a.enlace-boton { background: transparent; color: #0b3d91; border: 1px solid #0b3d91; padding: 8px 14px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; }
+header.barra button { color: #fff; border-color: #fff; }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #d5dbe6; font-size: 14px; }
+.estado-vigente { color: #2e7d32; font-weight: bold; }
+.estado-anulada { color: #c62828; font-weight: bold; }
+.acciones { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.toggle-pass { position: absolute; right: 10px; top: 32px; background: none; border: 0; cursor: pointer; font-size: 14px; color: #0b3d91; }

@@ -3,7 +3,7 @@ agent: "agent"
 tools:
   ["edit/createDirectory", "edit/editFiles", "search", "execute/getTerminalOutput", "execute/runInTerminal", "read/terminalLastCommand", "read/terminalSelection", "search/usages"]
 description: "Analyze-prompts,agents+instructions-files-and-reduce-redundant-words,unnecessary-format+repetitive-verbose-phrases-preserving-all-semantic-information-without-altering-original-meaning.Goal:reading-consumes-minimum-token-amount-following-given-example-format"
-model: "Claude Sonnet 4.5"
+model: "Claude Sonnet 4.6"
 ---
 
 # Prompt:Reduce-Copilot-Verbose

@@ -1,0 +1,8 @@
+# Ignorar todo en la raíz
+/*
+
+# Excepciones: permitir estos archivos y directorios
+!/.gitignore
+!/.github/
+!Mini_TesterCreativo/
+!Mini_TesterCreativo/**

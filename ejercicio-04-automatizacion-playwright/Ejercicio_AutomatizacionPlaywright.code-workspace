@@ -1,0 +1,7 @@
+{
+	"folders": [
+		{ "name": "ejercicio-04-automatizacion-playwright", "path": "." },
+		{ "name": "Asset_AutomatizacionPlaywright", "path": "../Asset_AutomatizacionPlaywright" },
+		{ "name": "ejercicio-03-framework (framework y app-web)", "path": "../ejercicio-03-framework" }
+	]
+}

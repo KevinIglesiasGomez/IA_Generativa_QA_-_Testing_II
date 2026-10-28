@@ -1,0 +1,11 @@
+# Ignorar todo
+*
+
+# Excepto estos archivos y directorios
+!.gitignore
+!.github/
+!.github/**
+!Mini_Gherkin/
+!Mini_Gherkin/**
+
+!README.md

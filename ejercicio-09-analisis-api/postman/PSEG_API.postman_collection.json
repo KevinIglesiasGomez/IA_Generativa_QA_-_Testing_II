@@ -1,0 +1,184 @@
+{
+  "info": {
+    "name": "Pruebas Seguros API",
+    "description": "Colección de humo de la API de Pruebas Seguros. Solo valida el código de estado de los casos felices.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api/v1" },
+    { "key": "token", "value": "" },
+    { "key": "siniestroId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Login cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "pm.collectionVariables.set('token', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"{{usuario}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pólizas",
+      "item": [
+        {
+          "name": "Listar pólizas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/polizas?page=1&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["polizas"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar pólizas de tipo AUTO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/polizas?tipo=AUTO",
+              "host": ["{{baseUrl}}"],
+              "path": ["polizas"],
+              "query": [{ "key": "tipo", "value": "AUTO" }]
+            }
+          }
+        },
+        {
+          "name": "Obtener póliza P-1001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('es la póliza pedida', function () {",
+                  "  pm.expect(pm.response.json().idPoliza).to.eql('P-1001');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/polizas/P-1001", "host": ["{{baseUrl}}"], "path": ["polizas", "P-1001"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Siniestros",
+      "item": [
+        {
+          "name": "Declarar siniestro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 201', function () {",
+                  "  pm.response.to.have.status(201);",
+                  "});",
+                  "pm.collectionVariables.set('siniestroId', pm.response.json().idSiniestro);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"polizaId\": \"P-1001\",\n  \"tipo\": \"COLISION\",\n  \"fecha\": \"2026-10-20\",\n  \"descripcion\": \"Colisión trasera en un semáforo con daños en el paragolpes\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/siniestros", "host": ["{{baseUrl}}"], "path": ["siniestros"] }
+          }
+        },
+        {
+          "name": "Obtener siniestro declarado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/siniestros/{{siniestroId}}", "host": ["{{baseUrl}}"], "path": ["siniestros", "{{siniestroId}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}

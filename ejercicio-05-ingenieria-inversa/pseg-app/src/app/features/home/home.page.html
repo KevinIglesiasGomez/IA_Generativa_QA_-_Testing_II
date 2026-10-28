@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hola, {{ sesion.nombre }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">Cerrar sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="warning" *ngIf="sinPermiso">No tienes permisos para acceder a esa sección.</ion-text>
+
+  <ion-list>
+    <ion-item routerLink="/polizas" detail>Mis pólizas</ion-item>
+    <ion-item routerLink="/siniestros/declarar" detail>Declarar siniestro</ion-item>
+    <ion-item routerLink="/tasacion" detail *ngIf="esAgente">Tasación de vehículos</ion-item>
+  </ion-list>
+</ion-content>

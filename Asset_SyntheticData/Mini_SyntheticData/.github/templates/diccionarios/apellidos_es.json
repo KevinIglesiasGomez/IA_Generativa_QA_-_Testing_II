@@ -1,0 +1,11 @@
+{
+  "locale": "es_ES",
+  "type": "last_names",
+  "data": [
+    "García", "Fernández", "González", "Rodríguez", "López", "Martínez", "Sánchez", "Pérez", "Gómez", "Martín",
+    "Jiménez", "Ruiz", "Hernández", "Díaz", "Moreno", "Muñoz", "Álvarez", "Romero", "Alonso", "Gutiérrez",
+    "Navarro", "Torres", "Domínguez", "Vázquez", "Ramos", "Gil", "Ramírez", "Serrano", "Blanco", "Suárez",
+    "Molina", "Castro", "Ortega", "Rubio", "Marín", "Sanz", "Iglesias", "Núñez", "Medina", "Garrido",
+    "Santos", "Castillo", "Cortés", "Lozano", "Guerrero", "Cano", "Prieto", "Méndez", "Cruz", "Flores"
+  ]
+}

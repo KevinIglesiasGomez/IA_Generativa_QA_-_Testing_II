@@ -1,0 +1,31 @@
+<ion-content class="login">
+  <h1>¡Bienvenido a Pruebas Seguros!</h1>
+  <p>Accede con tus credenciales corporativas</p>
+
+  <ion-text color="danger" *ngIf="errorGeneral" class="banner-error">{{ errorGeneral }}</ion-text>
+
+  <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
+    <ion-item [class.error]="errorUsuario">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input formControlName="usuario" label="Usuario" labelPlacement="floating" maxlength="20"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="errorUsuario">{{ errorUsuario }}</ion-note>
+
+    <ion-item [class.error]="errorPassword">
+      <ion-icon name="key-outline" slot="start"></ion-icon>
+      <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
+                 [type]="verPassword ? 'text' : 'password'"></ion-input>
+      <ion-button fill="clear" slot="end" (click)="verPassword = !verPassword">
+        <ion-icon [name]="verPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-note color="danger" *ngIf="errorPassword">{{ errorPassword }}</ion-note>
+
+    <ion-button type="submit" expand="block" [disabled]="cargando">
+      <ion-spinner name="crescent" *ngIf="cargando"></ion-spinner>
+      {{ cargando ? 'Iniciando sesión…' : 'Iniciar sesión' }}
+    </ion-button>
+  </form>
+
+  <ion-button fill="clear" (click)="recuperarPassword()">¿Olvidaste tu contraseña?</ion-button>
+</ion-content>
